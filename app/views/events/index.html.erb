@@ -1,6 +1,6 @@
 <h1>Events for <%= @date.strftime('%m/%d/%Y') %></h1>
 <%= form_tag events_path, method: :get do %>
-    <%= select_tag :event, options_for_select(Event.all.collect { |e| [e.start.strftime('%A'), e.id] }), name: "event[]" %>
+    <%= select_tag :event, options_for_select(Event.all.collect { |e| [e.start.strftime('%A'), e.id] }), name: "event[id]" %>
     <%= submit_tag 'Select another day' %>
 <% end %>
 
