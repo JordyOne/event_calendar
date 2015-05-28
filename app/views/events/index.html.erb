@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <% track.events.on_day(@date).each do |event| %>
+        <% track.total_events_on_day(@date).each do |event| %>
             <tr>
               <td>
                 <%= event.start.strftime('%I:%M%p') %>

@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   def index
-    byebug
-    @tracks = Track.all
+    @tracks = Track.actual_tracks
     if params[:event]
       event = Event.find(event_params[:id])
       @date = event.start
