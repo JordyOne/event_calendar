@@ -1,12 +1,9 @@
-<h1>Today's Events</h1>
-<form action="/events">
-  <select>
-    <% Event.all.each do |event| %>
-        <option value="<%= event.start %>"><%= event.start.strftime('%a') %></option>
-    <% end %>
-  </select>
-  <input type="submit" value="Choose another day"/>
-</form>
+<h1>The Day's Events</h1>
+<%= form_tag events_path, method: :get do %>
+    <%= select_tag :event, options_for_select(Event.all.collect { |e| [e.start.strftime('%A'), e.id] }), name: "event[]" %>
+    <%= submit_tag 'Select another day' %>
+<% end %>
+
 <div style="verticle-align: top; display: inline">
   <% @tracks.each do |track| %>
       <table border="1">
