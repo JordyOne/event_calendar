@@ -1,3 +1,3 @@
 class Track < ActiveRecord::Base
-  has_many :events
+  has_many :events, -> { order(:start) }
 end

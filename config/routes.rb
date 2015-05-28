@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :events, only: [:index]
+  resources :tracks, only: [:show]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

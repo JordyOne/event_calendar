@@ -1,4 +1,36 @@
-<h1>Events</h1>
-<% @events.each do |event| %>
-<%= event.name %>
-<% end %>
+<h1>Today's Events</h1>
+<div style="verticle-align: top; display: inline">
+  <% @tracks.each do |track| %>
+      <table border="1">
+        <thead>
+            <h2><%= track.name %></h2>
+        <tr>
+          <th>
+            Start
+          </th>
+          <th>
+            Finish
+          </th>
+          <th>
+            Event Name
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% track.events.each do |event| %>
+            <tr>
+              <td>
+                <%= event.start.strftime('%m/%d/%Y at %I:%M%p') %>
+              </td>
+              <td>
+                <%= event.finish.strftime('%m/%d/%Y at %I:%M%p') %>
+              </td>
+              <td>
+                <%= event.name %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
