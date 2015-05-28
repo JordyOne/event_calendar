@@ -7,7 +7,30 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'csv'
 
-CSV.foreach("#{Rails.public_path}/seed_data/test_events.csv", :headers => true) do |row|
-  event = Event.create!(row.to_hash)
-  puts "CREATED EVENT: #{event.name.upcase}"
-end
+# create Track data
+  Track.create(name: "General")
+  Track.create(name: "Pattern Recognition")
+  Track.create(name: "Image, Speech, and Signal Processing")
+  Track.create(name: "Document Analysis")
+  Track.create(name: "Biometrics")
+  Track.create(name: "Bioinformatics")
+
+  puts "CREATED TRACK CATEGORIES"
+
+# import csv data
+  CSV.foreach("#{Rails.public_path}/seed_data/test_events.csv", :headers => true) do |row|
+    row_hash = row.to_hash
+
+    # normalize data
+      start = DateTime.parse(row_hash["start"])
+      finish = DateTime.parse(row_hash["finish"])
+      name = row_hash["name"]
+    # add 1 to match up with track table index
+      track_id = row_hash["track"].gsub(/\D/, '').to_i + 1
+      track_id = 1 if track_id.blank?
+
+
+    # create events
+      event = Event.create!(start: start, finish: finish, name: name, track_id: track_id)
+      puts "CREATED EVENT: #{event.track_id}"
+  end
