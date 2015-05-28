@@ -1,9 +1,17 @@
 <h1>Today's Events</h1>
+<form action="/events">
+  <select>
+    <% Event.all.each do |event| %>
+        <option value="<%= event.start %>"><%= event.start.strftime('%a') %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Choose another day"/>
+</form>
 <div style="verticle-align: top; display: inline">
   <% @tracks.each do |track| %>
       <table border="1">
         <thead>
-            <h2><%= track.name %></h2>
+        <h2><%= track.name %></h2>
         <tr>
           <th>
             Start
@@ -17,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <% track.events.each do |event| %>
+        <% track.events.on_day(@date).each do |event| %>
             <tr>
               <td>
                 <%= event.start.strftime('%m/%d/%Y at %I:%M%p') %>

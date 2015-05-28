@@ -22,8 +22,8 @@ require 'csv'
     row_hash = row.to_hash
 
     # normalize data
-      start = DateTime.parse(row_hash["start"])
-      finish = DateTime.parse(row_hash["finish"])
+      start = DateTime.strptime(row_hash["start"], '%m/%d/%Y %k:%M')
+      finish = DateTime.strptime(row_hash["finish"], '%m/%d/%Y %k:%M')
       name = row_hash["name"]
     # add 1 to match up with track table index
       track_id = row_hash["track"].gsub(/\D/, '').to_i + 1
